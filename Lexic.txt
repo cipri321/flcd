@@ -1,0 +1,29 @@
+a.Special symbols, representing:
+
+<operator> :== + | - | * | / | <- | < | <= | = | >=
+<separator> :== [ | ] | { | } | : | ; | space
+<reserved_word> :== var | integer | boolean | char | string | read | print | if | else | loop_until
+
+
+b. identifiers
+
+<letter> ::= a | b | ... | z | A | B | ... | Z
+<digit> ::= 0 | 1 | ... | 9
+<id> ::= <letter> { <letter> | <digit> | _ }
+
+c. constants
+1.integer - rule:
+	<noconst> ::= +<no>|-<no>|<no>
+    <no> ::= <digit><no>
+
+2.character
+
+    <character>::=<letter>|<digit>
+
+3.string
+
+      <constchar>::=<string>
+
+      <string>::=<char>{<string>}
+
+      <char>::=<letter>|<digit>

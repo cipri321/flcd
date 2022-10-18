@@ -1,0 +1,20 @@
+<program> ::= ~ decllist ; cmpdstmt ~
+<decllist> ::= <declaration> | <declaration> ; <decllist>
+<declaration> ::= var <IDENTIFIER>: <type>
+<type1> ::= boolean | char | integer
+<arraydecl> ::= <declaration>[]
+<type>  ::= <type1>|<arraydecl>
+<cmpdstmt> ::= <stmtlist>
+<stmtlist> ::= <stmt> | <stmt> ; <stmtlist>
+<stmt> ::= <simplstmt> | <structstmt>
+<simplstmt> ::= <assignstmt> | <iostmt>
+<assignstmt> ::= <IDENTIFIER> <- <expression>
+<expression> ::= <expression> + <term> | <term>
+<term> ::= <term> * <factor> | <factor>
+<factor> ::= ( <expression> ) | <IDENTIFIER>
+<iostmt> ::= read | print (<IDENTIFIER>)
+<structstmt> ::= <cmpdstmt> | <ifstmt> | <whilestmt>
+<ifstmt> ::= if(<condition>) { <stmt> } else { <stmt> }
+<whilestmt> ::= loop_until(<condition>) { <stmt> }
+<condition> ::= <expression> <RELATION> <expression>
+<RELATION> ::= < | <= | = | <> | >= | >
