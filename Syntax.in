@@ -7,8 +7,9 @@
 <cmpdstmt> ::= <stmtlist>
 <stmtlist> ::= <stmt> | <stmt> ; <stmtlist>
 <stmt> ::= <simplstmt> | <structstmt>
-<simplstmt> ::= <assignstmt> | <iostmt>
+<simplstmt> ::= <assignstmt> | <iostmt> | <appendstmt>
 <assignstmt> ::= <IDENTIFIER> <- <expression>
+<appendstmt> ::= <IDENTIFIER>.insert_back(<expression>)
 <expression> ::= <expression> + <term> | <term>
 <term> ::= <term> * <factor> | <factor>
 <factor> ::= ( <expression> ) | <IDENTIFIER>
