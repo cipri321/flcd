@@ -4,10 +4,14 @@
 
 #include "SymbolTable.h"
 
-bool SymbolTable::insert(const string &name, const Value &val) {
-    return false;
+int SymbolTable::insert(const string &name) {
+    int value = table.get(name);
+    if(value != -1)
+        return value;
+    table.add(name, size++);
+    return table.get(name);
 }
 
-Value SymbolTable::get_value(const string &name) {
-    return nullptr;
+int SymbolTable::get_id(const string &name) {
+    return table.get(name);
 }

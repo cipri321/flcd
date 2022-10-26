@@ -8,12 +8,11 @@
 #include "HashTable.h"
 
 class SymbolTable {
-    HashTable identifiers;
-    HashTable constants;
-    vector<Value> values;
+    HashTable table;
+    int size=0;
 public:
-    bool insert(const string &name, const Value &val);
-    Value get_value(const string &name);
+    int insert(const string &name);
+    int get_id(const string &name);
 };
 
 

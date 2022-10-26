@@ -20,9 +20,10 @@ public:
     bool add(const string& s, int val);
     int get(const string& s);
     void clear();
+    bool exists(const string& s);
+
 private:
     static long long compute_hash(const string& s);
-    bool exists(const string& s);
     int find_value(const string& s);
 };
 
