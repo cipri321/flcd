@@ -19,6 +19,8 @@
 *
 /
 %
+:
+
 var
 integer
 boolean
@@ -26,3 +28,8 @@ char
 false
 true
 loop_until
+read
+print
+if
+else
+

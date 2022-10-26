@@ -1,4 +1,4 @@
-<program> ::= ~ decllist ; cmpdstmt ~
+<program> ::= ~ <decllist> ; <cmpdstmt> ~
 <decllist> ::= <declaration> | <declaration> ; <decllist>
 <declaration> ::= var <IDENTIFIER>: <type>
 <type1> ::= boolean | char | integer
@@ -10,10 +10,10 @@
 <simplstmt> ::= <assignstmt> | <iostmt> | <appendstmt>
 <assignstmt> ::= <IDENTIFIER> <- <expression>
 <appendstmt> ::= <IDENTIFIER>.insert_back(<expression>)
-<expression> ::= <expression> + <term> | <term>
-<term> ::= <term> * <factor> | <factor>
+<expression> ::= <expression> + <term> | <expression> - <term> | <term>
+<term> ::= <term> * <factor> | <term> / <factor> | <factor>
 <factor> ::= ( <expression> ) | <IDENTIFIER>
-<iostmt> ::= read | print (<IDENTIFIER>)
+<iostmt> ::= read (<IDENTIFIER>) | print (<IDENTIFIER>)
 <structstmt> ::= <cmpdstmt> | <ifstmt> | <whilestmt>
 <ifstmt> ::= if(<condition>) { <stmt> } else { <stmt> }
 <whilestmt> ::= loop_until(<condition>) { <stmt> }

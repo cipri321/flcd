@@ -1,29 +1,35 @@
 a.Special symbols, representing:
 
 <operator> :== + | - | * | / | <- | < | <= | = | >=
-<separator> :== [ | ] | { | } | : | ; | space
-<reserved_word> :== var | integer | boolean | char | string | read | print | if | else | loop_until
+<separator> :== [ | ] | { | } | : | ; | space | ~
+<reserved_word> :== var | integer | boolean | char | string | read | print | if | else | loop_until | true | false
 
 
 b. identifiers
 
 <letter> ::= a | b | ... | z | A | B | ... | Z
 <digit> ::= 0 | 1 | ... | 9
-<id> ::= <letter> { <letter> | <digit> | _ }
+<id> ::= <letter><id> | <letter><digit><id> | <id>_<digit><id> | <id>_<id>
 
 c. constants
 1.integer - rule:
 	<noconst> ::= +<no>|-<no>|<no>
-    <no> ::= <digit><no>
+    <no> ::= <non_zero_digit><zero_no>
+    <digit> ::= <non_zero_digit> | 0
+    <non_zero_digit> ::= 1 | 2 | ... | 9
+    <zero_no> ::= <digit> | <digit><zero_no>
 
 2.character
 
-    <character>::=<letter>|<digit>
+    <character>::='<letter>|<digit>'
 
 3.string
 
-      <constchar>::=<string>
+      <constchar>::="<string>"
 
-      <string>::=<char>{<string>}
+      <string>::=<char><string>
 
       <char>::=<letter>|<digit>
+
+4.boolean
+    <bool> ::= true | false
