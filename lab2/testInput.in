@@ -1,0 +1,15 @@
+~
+var a: integer;
+var d: integer;
+var is_prime: boolean;
+read(a);
+is_prime<-false;
+d<--2;
+loop_until(d*d<a) {
+	if(a%d = 0) {
+		is_prime<-true;
+	}
+	d<-d+1;
+}
+print(is_prime);
+~
