@@ -13,7 +13,8 @@ class SymbolTable {
 public:
     int insert(const string &name);
     int get_id(const string &name);
-//    friend ostream& operator<<(ostream& os, const SymbolTable& symbolTable);
+
+    friend ostream& operator<<(ostream& os, const SymbolTable& symbolTable);
 
 };
 

@@ -21,6 +21,7 @@ public:
     int get(const string& s);
     void clear();
     bool exists(const string& s);
+    vector<pair<int, string> > get_table() const;
 
 private:
     static long long compute_hash(const string& s);

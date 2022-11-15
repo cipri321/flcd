@@ -3,6 +3,7 @@
 //
 
 #include "SymbolTable.h"
+#include <iostream>
 
 int SymbolTable::insert(const string &name) {
     int value = table.get(name);
@@ -14,4 +15,11 @@ int SymbolTable::insert(const string &name) {
 
 int SymbolTable::get_id(const string &name) {
     return table.get(name);
+}
+
+ostream &operator<<(ostream &os, const SymbolTable &symbolTable) {
+    vector<pair<int, string> > hash_table = symbolTable.table.get_table();
+    for(auto it: hash_table)
+        os<<it.first<<" "<<it.second<<"\n";
+    return os;
 }

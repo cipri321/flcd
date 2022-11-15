@@ -16,8 +16,9 @@ class Scanner {
     PIF pif;
 
 public:
-    void scan(const string& fileName);
+    pair<bool, string> scan(const string& fileName);
     void printPif();
+    void printSymbolTable();
 private:
     vector<string> tokenize(string line);
 

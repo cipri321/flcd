@@ -6,12 +6,14 @@
 #include <fstream>
 #include <iostream>
 
-void Scanner::scan(const string& fileName) {
+pair<bool, string> Scanner::scan(const string& fileName) {
     ifstream fi(fileName);
     char *aux=new char[1005];
+    bool lexically_correct = true;
+    string error = "";
     while(fi.getline(aux, 1000)) {
         vector<string> tokens = tokenize(aux);
-        for_each(tokens.begin(), tokens.end(), [this](const string& token) {
+        for_each(tokens.begin(), tokens.end(), [this, &lexically_correct, &error](const string& token) {
             TokenCode tk = tokenClassifier.getType(token);
             switch (tk) {
                 case reservedWord:
@@ -22,22 +24,25 @@ void Scanner::scan(const string& fileName) {
                 }
                 case id: {
                     int idx = idSymbolTable.insert(token);
-                    pif.add(token, idx);
+                    pif.add("id", idx);
                     return;
                 }
                 case constant: {
                     int idx = constSymbolTable.insert(token);
-                    pif.add(token, idx);
+                    pif.add("const", idx);
                     return;
                 }
                 case invalid: {
-                    return;
+                    error+=token+" is invalid\n";
+                    lexically_correct = false;
+                    return ;
                 }
 
             }
         });
 
     }
+    return {lexically_correct, error};
 }
 
 vector<string> Scanner::tokenize(string line) {
@@ -73,6 +78,11 @@ vector<string> Scanner::tokenize(string line) {
                 throw;
             }
         }
+        //identifier error numeric first char
+        else if(isdigit(line[i]) && i<line.size()-1 && isalpha(line[i+1])) {
+            tokens.push_back(line.substr(i, 2));
+            i++;
+        }
         //check numeric constant
         else if(isdigit(line[i]) ||
                 ((i<line.size()-1 && (line[i] == '+' || line[i] == '-') && isdigit(line[i+1])) &&
@@ -100,7 +110,7 @@ vector<string> Scanner::tokenize(string line) {
             tokens.push_back(line.substr(i, 1));
         }
         //check if it is identifier or reserved word
-        else if(line[i]!=' ') {
+        else if(isalpha(line[i])) {
             int len=1;
             while(i+len-1<line.size() && TokenClassifier::isIdentifier(line.substr(i, len))) {
                 len++;
@@ -111,11 +121,18 @@ vector<string> Scanner::tokenize(string line) {
                 i+=len-1;
             }
         }
+        else {
+            tokens.push_back(line.substr(i, 1));
+        }
     }
 
     return tokens;
 }
 
 void Scanner::printPif() {
-    cout<<pif;
+    cout<<"PIF:\n"<<pif;
+}
+
+void Scanner::printSymbolTable() {
+    cout<<"ID symbol table:\n"<<idSymbolTable<<"\n\nConst symbol table:\n"<<constSymbolTable<<"\n";
 }

@@ -6,8 +6,9 @@
 #include <ostream>
 
 ostream &operator<<(ostream &os, const PIF &pif) {
-    for_each(pif.table.begin(), pif.table.end(), [&os](pair<string, int> el) {
-        os<<el.first<<" "<<el.second<<"\n";
+    for_each(pif.table.begin(), pif.table.end(), [&os](const pair<string, int>& el) {
+        if(el.first != " " && el.first != "\t")
+            os<<el.first<<" "<<el.second<<"\n";
     });
     return os;
 }

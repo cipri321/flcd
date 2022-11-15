@@ -25,9 +25,9 @@ public:
     static bool isConstant(const string& token);
 
     TokenClassifier() {
-        reservedWords = vector<string>{"var", "integer", "boolean", "char", "false", "true", "loop_until", "read", "print", "if", "else"};
+        reservedWords = vector<string>{"var", "integer", "boolean", "char", "loop_until", "read", "print", "if", "else", "insert_back"};
         operators = vector<string>{"<", "<=", ">", ">=", "=", "<-", "+", "-", "*", "/", "%", ":"};
-        separators = vector<string>{"~", ";", " ", "\n", "{", "}", "(", ")", "[", "]"};
+        separators = vector<string>{"~", ";", " ", "\n", "{", "}", "(", ")", "[", "]", "\t", "."};
     }
 };
 

@@ -11,10 +11,10 @@ TokenCode TokenClassifier::getType(const string& token) {
         return op;
     if(isSeparator(token))
         return sep;
-    if(isIdentifier(token))
-        return id;
     if(isConstant(token))
         return constant;
+    if(isIdentifier(token))
+        return id;
     return invalid;
 }
 
@@ -32,9 +32,13 @@ bool TokenClassifier::isIdentifier(const string& token) {
     return regex_match(token, idPattern);
 }
 bool TokenClassifier::isConstant(const string& token) {
-    regex intPattern("[+-]?[0-9][0-9]*");
-    regex charPattern(R"("^\'[a-zA-Z0-9_?!#*./%+=<>;)(}{ ]\'")");
+    regex intPattern("([+-]?[1-9][0-9]*)|0");
+    regex charPattern("^\'[a-zA-Z0-9_?!#*./%+=<>;)(}{ ]\'");
     regex stringPattern("^\"[a-zA-Z0-9_?!#*./%+=<>;)(}{ ]+\"");
-    return regex_match(token, intPattern) || regex_match(token, charPattern) || regex_match(token, stringPattern);
+    regex boolPattern("^(true|false)");
+    return regex_match(token, intPattern) ||
+    regex_match(token, charPattern) ||
+    regex_match(token, stringPattern) ||
+            regex_match(token, boolPattern);
 }
 
