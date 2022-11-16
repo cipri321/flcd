@@ -32,13 +32,13 @@ void FiniteAutomata::load_from_json_file(string filename) {
             final_states.push_back(state.asString());
         }
     }
-
+    prepare_transition_map();
 }
 
 bool FiniteAutomata::check_sequence(const vector<string>& sequence) {
     string curr_state = initial_state;
     for(const auto &it: sequence) {
-        if((curr_state=get_next_state(curr_state, it)).empty()) {
+        if((curr_state=get_next_state_eff(curr_state, it)).empty()) {
             return false;
         }
     }
@@ -50,7 +50,7 @@ bool FiniteAutomata::check_sequence(const vector<string>& sequence) {
             });
 }
 
-string FiniteAutomata::get_next_state(const string& curr_state, string symbol) {
+string FiniteAutomata::get_next_state(const string& curr_state, const string& symbol) {
     for(Transition it:transitions) {
         if(it.get_initial_state() == curr_state && it.get_symbol() == symbol) {
             return it.get_final_state();
@@ -80,3 +80,16 @@ ostream &operator<<(ostream &os, const FiniteAutomata &fa) {
     }
     return os;
 }
+
+void FiniteAutomata::prepare_transition_map() {
+    for(auto it: transitions) {
+        transition_map[it.get_initial_state()][it.get_symbol()] = it.get_final_state();
+    }
+}
+
+string FiniteAutomata::get_next_state_eff(const string &curr_state, const string &symbol) {
+    if(transition_map[curr_state].find(symbol) == transition_map[curr_state].end())
+        return "";
+    return transition_map[curr_state][symbol];
+}
+

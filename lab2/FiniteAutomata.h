@@ -9,6 +9,7 @@
 
 #include "Transition.h"
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
@@ -19,13 +20,18 @@ class FiniteAutomata {
     string initial_state;
     vector<string> final_states;
 
+    unordered_map<string, unordered_map<string, string> > transition_map;
+
+
 public:
     void load_from_json_file(string filename);
     bool check_sequence(const vector<string>& sequence);
     friend ostream& operator<<(ostream& os, const FiniteAutomata& fa);
 
 private:
-    string get_next_state(const string& curr_state, string symbol);
+    string get_next_state(const string& curr_state, const string& symbol);
+    void prepare_transition_map();
+    string get_next_state_eff(const string& curr_state, const string& symbol);
 
 };
 
