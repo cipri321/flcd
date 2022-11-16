@@ -6,6 +6,7 @@
 #define LAB2_TRANSITION_H
 
 #include <string>
+#include <utility>
 
 using namespace std;
 
@@ -19,9 +20,9 @@ public:
         initial_state=final_state=symbol="";
     }
     Transition(string initial_state, string final_state, string symbol) {
-        this->symbol=symbol;
-        this->final_state=final_state;
-        this->initial_state=initial_state;
+        this->symbol=std::move(symbol);
+        this->final_state=std::move(final_state);
+        this->initial_state=std::move(initial_state);
     }
 
     string get_initial_state() {

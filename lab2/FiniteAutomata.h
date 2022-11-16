@@ -22,6 +22,7 @@ class FiniteAutomata {
 public:
     void load_from_json_file(string filename);
     bool check_sequence(const vector<string>& sequence);
+    friend ostream& operator<<(ostream& os, const FiniteAutomata& fa);
 
 private:
     string get_next_state(const string& curr_state, string symbol);

@@ -58,3 +58,25 @@ string FiniteAutomata::get_next_state(const string& curr_state, string symbol) {
     }
     return {};
 }
+
+ostream &operator<<(ostream &os, const FiniteAutomata &fa) {
+    os<<"STATES:\n";
+    for(const auto& it:fa.states) {
+        os<<it<<"\n";
+    }
+    os<<"\nALPHABET:\n";
+    for(const auto& it:fa.alphabet) {
+        os<<it<<" ";
+    }
+    os<<"\n\nTRANSITIONS:\n";
+    for(auto it:fa.transitions) {
+        os<<it.get_initial_state()<<" -> "<<it.get_symbol()<<" -> "<<it.get_final_state()<<"\n";
+    }
+    os<<"\nINITIAL STATE:\n";
+    os<<fa.initial_state<<"\n";
+    os<<"\nFINAL STATES:\n";
+    for(const auto& it:fa.final_states) {
+        os<<it<<"\n";
+    }
+    return os;
+}
